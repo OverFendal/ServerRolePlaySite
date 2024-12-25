@@ -186,6 +186,13 @@ main {
   box-sizing: border-box;
 }
 
+.list-rules li {
+  font-size: 18px; /* Увеличен размер шрифта */
+  color: #ddd; /* Белый с сероватым оттенком */
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
 .line {
   height: 1px;
   width: 100%;
