@@ -280,3 +280,16 @@ main {
 .online-users-list {
   -ms-overflow-style: none; /* Убираем видимость в IE и Edge */
 }
+
+.total-members-count-container {
+  position: fixed;
+  top: 25px;
+  left: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5); /* полупрозрачный фон */
+  padding: 5px 10px;
+  border-radius: 5px;
+  z-index: 1000;
+}

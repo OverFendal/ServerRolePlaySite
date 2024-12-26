@@ -44,6 +44,7 @@ function fetchDiscordWidget() {
   const onlineUsersList = document.querySelector('.online-users-list'); // Получаем контейнер для списка
   const onlineUsersDiv = document.getElementById('online-users'); // Получаем контейнер для всего блока
   const header = onlineUsersDiv.querySelector('h3'); // Заголовок для обновления текста
+  const totalMembersCount = document.querySelector('.total-members-count'); // Получаем элемент для отображения общего числа участников
   
   onlineUsersList.innerHTML = "<li>Загрузка...</li>"; // Показываем индикатор загрузки
 
@@ -51,7 +52,13 @@ function fetchDiscordWidget() {
     .then(response => response.json())
     .then(data => {
       const onlineMembers = data.members.filter(member => member.status === 'online');
-      
+      const totalMembers = data.members.length; // Общее количество участников
+
+      // Обновляем общее количество участников
+      if (totalMembersCount) {
+        totalMembersCount.innerHTML = `Всего участников: ${totalMembers}`;
+      }
+
       if (onlineMembers.length > 0) {
         const onlineList = onlineMembers.map(member => `<li>${member.username}</li>`).join('');
         onlineUsersList.innerHTML = onlineList;
@@ -71,6 +78,11 @@ function fetchDiscordWidget() {
       
       // Если ошибка, также обновляем заголовок
       header.innerHTML = "Онлайн (0)";
+      
+      // Также обновляем количество участников в случае ошибки
+      if (totalMembersCount) {
+        totalMembersCount.innerHTML = "Всего участников: 0";
+      }
     });
 }
 
