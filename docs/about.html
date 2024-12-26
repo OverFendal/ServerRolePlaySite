@@ -9,25 +9,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <script src="./script.js"></script>
     <style>
-        
+        /* Стили для адаптивности */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* Соотношение сторон 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Оставшиеся стили */
         .text-overlay {
             padding: 20px; 
             border-radius: 20px;
-            background: rgb(53 51 54 / 70%); /* Полупрозрачный фон */
+            background: rgb(53 51 54 / 70%);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             max-width: 800px;
             margin: 0 auto;
             margin-bottom: 20px;
         }
-
-        
-        #join .text-overlay {
-            padding: 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        
         .youtube-link {
             background: linear-gradient(to bottom, rgba(53, 51, 54, 0.7), rgba(53, 51, 54, 0.3)); 
             padding: 3px 10px; 
@@ -36,18 +44,13 @@
             margin-top: 10px;
             display: inline-block; 
         }
-
-        
         .youtube-link a {
             color: #fff;
             text-decoration: none;
         }
-
         .youtube-link a:hover {
             text-decoration: underline;
         }
-
-        
         .subtitle-about {
             color: white; 
             font-size: 18px; 
@@ -74,10 +77,9 @@
             </p>
             
             <div class="video-container">
-                <iframe width="800" height="450" src="https://www.youtube.com/embed/zVInUP_HceY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/zVInUP_HceY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
-            
             <div class="youtube-link">
                 <p>
                     Или посмотрите видео на <a href="https://www.youtube.com/watch?v=zVInUP_HceY&t" target="_blank">YouTube</a>.
@@ -101,4 +103,3 @@
     </footer>
 </body>
 </html>
-
