@@ -2,6 +2,12 @@ html, p, button, h1, h2, h3, a, div {
   font-family: 'Poppins', sans-serif; /* Изменён шрифт */
 }
 
+span {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 .body-section {
   display: flex;
   min-height: 100vh;
@@ -13,17 +19,29 @@ html, p, button, h1, h2, h3, a, div {
   color: white;
 }
 
-.header-navigation {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
 header {
   padding: 20px;
   padding: 40px 24px 25px 0;
   text-align: center;
   color: white;
+}
+
+.header-navigation {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  max-width: 860px;
+}
+
+.header-nav-two {
+  justify-content: center;
+}
+
+.qw {
+  visibility: hidden;
 }
 
 main {
@@ -211,7 +229,7 @@ main {
   font-weight: 400;
 }
 
-#online-users {
+.online-users-container {
   position: absolute; /* Размещение блока в правой части */
   top: 50%; /* Центрирование по вертикали */
   right: 20px; /* Отступ от правого края */
@@ -223,6 +241,13 @@ main {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень */
   color: #ffffff; /* Белый текст */
   font-family: 'Poppins', sans-serif;
+  
+  @media (max-width: 1600px) {
+    position: static;
+    transform: inherit;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
 }
 
 #online-users h3 {
@@ -282,14 +307,10 @@ main {
 }
 
 .total-members-count-container {
-  position: fixed;
-  top: 25px;
-  left: 10px;
+  display: flex;
+  align-items: center;
   font-size: 16px;
   font-weight: bold;
   color: white;
-  background-color: rgba(0, 0, 0, 0.5); /* полупрозрачный фон */
-  padding: 5px 10px;
   border-radius: 5px;
-  z-index: 1000;
 }

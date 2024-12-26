@@ -1,3 +1,6 @@
+GUILD_URL = 'https://discord.com/api/v9/invites/ErNJwsqzVu?with_counts=true&with_expiration=true';
+GUILD_WIDGET_URL = 'https://discord.com/api/guilds/422346423321886730/widget.json';
+
 // Функция для переключения описания
 function toggleDescription(id, triggerElement) {
   var desc = document.getElementById(id);
@@ -39,6 +42,8 @@ document.querySelectorAll('.rp-item').forEach(function(item) {
   });
 });
 
+// DISCORD API
+
 // Функция для получения и отображения данных о онлайн-игроках с сервера Discord
 function fetchDiscordWidget() {
   const onlineUsersList = document.querySelector('.online-users-list'); // Получаем контейнер для списка
@@ -48,43 +53,55 @@ function fetchDiscordWidget() {
   
   onlineUsersList.innerHTML = "<li>Загрузка...</li>"; // Показываем индикатор загрузки
 
-  fetch('https://discord.com/api/guilds/422346423321886730/widget.json')
+  // Обращение к API Discord с помощью invite-ссылки
+  fetch(GUILD_URL)
     .then(response => response.json())
     .then(data => {
-      const onlineMembers = data.members.filter(member => member.status === 'online');
-      const totalMembers = data.members.length; // Общее количество участников
-
-      // Обновляем общее количество участников
-      if (totalMembersCount) {
-        totalMembersCount.innerHTML = `Всего участников: ${totalMembers}`;
-      }
-
-      if (onlineMembers.length > 0) {
-        const onlineList = onlineMembers.map(member => `<li>${member.username}</li>`).join('');
-        onlineUsersList.innerHTML = onlineList;
-        
-        // Обновляем заголовок с количеством онлайн-игроков
-        header.innerHTML = `Онлайн (${onlineMembers.length})`;
-      } else {
-        onlineUsersList.innerHTML = "<li>Нет игроков в сети</li>";
-        
-        // Если нет игроков, заголовок будет "Онлайн (0)"
-        header.innerHTML = "Онлайн (0)";
-      }
+      // Получение всех участников сервера, несмотря на их сетевой статус и роли
+      // возвращаем значение в следующий then в качестве аргумента totalMembers
+      return data.approximate_member_count;
     })
-    .catch(error => {
-      console.error('Ошибка при получении данных: ', error);
-      onlineUsersList.innerHTML = "<li>Не удалось загрузить данные о сервере Discord.</li>";
-      
-      // Если ошибка, также обновляем заголовок
-      header.innerHTML = "Онлайн (0)";
-      
-      // Также обновляем количество участников в случае ошибки
-      if (totalMembersCount) {
-        totalMembersCount.innerHTML = "Всего участников: 0";
-      }
-    });
+    .then((totalMembers) => {
+      return fetch(GUILD_WIDGET_URL)
+      .then(response => response.json())
+      .then(data => {
+        const onlineMembers = data.members.filter(member => member.status === 'online' || member.status === 'idle' || member.status === 'dnd');
+        console.log(onlineMembers)
+  
+        // Обновляем общее количество участников
+        if (totalMembersCount) {
+          totalMembersCount.innerHTML = `Всего участников: ${totalMembers}`;
+        }
+  
+        if (onlineMembers.length > 0) {
+          const onlineList = onlineMembers.map(member => `<li>${member.username}</li>`).join('');
+          onlineUsersList.innerHTML = onlineList;
+          
+          // Обновляем заголовок с количеством онлайн-игроков
+          header.innerHTML = `Онлайн (${onlineMembers.length})`;
+        } else {
+          onlineUsersList.innerHTML = "<li>Нет игроков в сети</li>";
+          
+          // Если нет игроков, заголовок будет "Онлайн (0)"
+          header.innerHTML = "Онлайн (0)";
+        }
+      })
+      .catch(error => {
+        console.error('Ошибка при получении данных: ', error);
+        onlineUsersList.innerHTML = "<li>Не удалось загрузить данные о сервере Discord.</li>";
+        
+        // Если ошибка, также обновляем заголовок
+        header.innerHTML = "Онлайн (0)";
+        
+        // Также обновляем количество участников в случае ошибки
+        if (totalMembersCount) {
+          totalMembersCount.innerHTML = "Всего участников: 0";
+        }
+      });
+    });  
 }
 
 // Вызов функции для загрузки виджета при загрузке страницы
 document.addEventListener('DOMContentLoaded', fetchDiscordWidget);
+
+
