@@ -145,10 +145,9 @@ main {
 }
 
 .rp-description {
-  display: none;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 5px;
+  display: none; /* Скрывает элемент */
+  opacity: 0; /* Начальная прозрачность */
+  transition: opacity 0.3s ease; /* Плавное изменение прозрачности за 0.3 секунды */
 }
 
 .button-link {
@@ -210,4 +209,74 @@ main {
   font-size: 12px;
   line-height: 24px;
   font-weight: 400;
+}
+
+#online-users {
+  position: absolute; /* Размещение блока в правой части */
+  top: 50%; /* Центрирование по вертикали */
+  right: 20px; /* Отступ от правого края */
+  transform: translateY(-50%); /* Выравнивание по вертикали */
+  width: 300px; /* Устанавливаем ширину блока */
+  background-color: rgba(30, 30, 47, 0.6); /* Тёмный фон */
+  padding: 20px; /* Отступы внутри блока */
+  border-radius: 20px; /* Закругляем углы */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень */
+  color: #ffffff; /* Белый текст */
+  font-family: 'Poppins', sans-serif;
+}
+
+#online-users h3 {
+  margin: 0 0 15px 0;
+  text-align: center;
+  font-size: 18px;
+  color: #ffffff; /* Цвет заголовка */
+  border-bottom: 3px solid #54036d; /* Линия под заголовком */
+  padding-bottom: 10px;
+}
+
+.online-users-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 375px; /* Ограничение высоты */
+  overflow-y: auto; /* Прокрутка при переполнении */
+}
+
+.online-users-list li {
+  background-color: #2a2a3d; /* Немного светлее, чем фон контейнера */
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px; /* Скругленные углы у элементов */
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+.online-users-list li:hover {
+  background-color: #ffffff; 
+  color: #050508; /* И текст на темный */
+  cursor: pointer;
+}
+
+/* Адаптивность для мобильных устройств */
+@media screen and (max-width: 768px) {
+  #online-users {
+    width: 250px;
+    top: 10px;
+    right: 10px;
+  }
+}
+/* Убираем видимость ползунка для веб-кит браузеров */
+.online-users-list::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Для Firefox */
+.online-users-list {
+  scrollbar-width: none; /* Полностью убираем видимость ползунка */
+}
+
+/* Для других браузеров */
+.online-users-list {
+  -ms-overflow-style: none; /* Убираем видимость в IE и Edge */
 }
