@@ -42,6 +42,9 @@ document.querySelectorAll('.rp-item').forEach(function(item) {
 // Функция для получения и отображения данных о онлайн-игроках с сервера Discord
 function fetchDiscordWidget() {
   const onlineUsersList = document.querySelector('.online-users-list'); // Получаем контейнер для списка
+  const onlineUsersDiv = document.getElementById('online-users'); // Получаем контейнер для всего блока
+  const header = onlineUsersDiv.querySelector('h3'); // Заголовок для обновления текста
+  
   onlineUsersList.innerHTML = "<li>Загрузка...</li>"; // Показываем индикатор загрузки
 
   fetch('https://discord.com/api/guilds/422346423321886730/widget.json')
@@ -52,13 +55,22 @@ function fetchDiscordWidget() {
       if (onlineMembers.length > 0) {
         const onlineList = onlineMembers.map(member => `<li>${member.username}</li>`).join('');
         onlineUsersList.innerHTML = onlineList;
+        
+        // Обновляем заголовок с количеством онлайн-игроков
+        header.innerHTML = `Онлайн (${onlineMembers.length})`;
       } else {
         onlineUsersList.innerHTML = "<li>Нет игроков в сети</li>";
+        
+        // Если нет игроков, заголовок будет "Онлайн (0)"
+        header.innerHTML = "Онлайн (0)";
       }
     })
     .catch(error => {
       console.error('Ошибка при получении данных: ', error);
       onlineUsersList.innerHTML = "<li>Не удалось загрузить данные о сервере Discord.</li>";
+      
+      // Если ошибка, также обновляем заголовок
+      header.innerHTML = "Онлайн (0)";
     });
 }
 
