@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.divAbsolute{
+    position: relative;
+}
+
+.divMap{
+    position: absolute;
+}
+
+.divMap svg{
+    position: absolute;
+}
+
+.highlight_borders{
+    fill: none;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.highlight_borders:hover{
+    stroke: black;
+    stroke-width: 10px;
+    fill: lightblue;
+    fill-opacity: 0.5;
+}
+
+.mapLegendDivTooltip{
+    min-width: 10%;
+    max-width: 25%;
+    height: auto;
+    background-color: aliceblue;
+    position: absolute;
+    word-wrap: break-word;
+}
