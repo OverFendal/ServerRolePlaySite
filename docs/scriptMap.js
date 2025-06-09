@@ -130,6 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.addEventListener("click", () => {
-        tooltip.style.display = "none";
+        tooltip.style.display = "none"; 
     });
 });
