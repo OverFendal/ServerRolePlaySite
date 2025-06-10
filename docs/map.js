@@ -60,12 +60,12 @@ document.addEventListener("mouseup", () => {
 
 // Кнопки + и −
 document.getElementById("zoom-in").addEventListener("click", () => {
-    scale = Math.min(5, scale + 0.2);
+    scale = Math.min(5, scale + 0.5);
     applyTransform();
 });
 
 document.getElementById("zoom-out").addEventListener("click", () => {
-    scale = Math.max(0.5, scale - 0.2);
+    scale = Math.max(0.5, scale - 0.5);
     applyTransform();
 });
 function adjustZoomControlScale() {
