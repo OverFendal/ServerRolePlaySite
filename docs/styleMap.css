@@ -56,3 +56,24 @@ img {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 19px;
 }
+
+.zoom-controls {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 10000;
+    transform-origin: top right;
+    will-change: transform;
+}
+
+.zoom-controls button {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    user-select: none;
+}
